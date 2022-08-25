@@ -1,0 +1,545 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>R/V Gunnerus - Research vessel - NTNU </title>
+		<meta charset="utf-8">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.js"></script>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="{% static '/crane/Ship_Crane/main.css' %}" />
+		<link type="text/css" rel="stylesheet" href="{% static '/crane/Ship_Crane/main.css' %}">
+		<style>
+			a {
+				color: blue;
+			}
+			.control-inactive button {
+				color: #888;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<div id="info">
+			<a href="https://www.ntnu.edu/oceans/gunnerus" target="_blank" rel="noopener">NTNU</a> R/V Gunnerus - Research vessel
+			(model from <a href="https://www.ntnu.edu/ihb/intelligent-systems-lab" target="_blank" rel="noopener">Intelligent Systems Lab</a>)<br/>
+		</div>
+
+		<div class="figures" align="right" style="top: 3em;">
+		<div class="topicSelection">
+			<ul>
+			  <li class="topicList"> 
+				<input class="slectButton" type="button" value="Crane" name="slect_button" id="crane_button">
+				<ul>
+					<input type="checkbox" id="crane1" name="crane1" value="Gunnerus/Crane1/dp_main_cyl">
+					<label for="vehicle1"> pressure of main cylinder </label><br>
+					<input type="checkbox" id="crane2" name="crane2" value="Gunnerus/Crane1/extension_length_outer_boom">
+					<label for="vehicle2"> outer boom extension length</label><br>
+					<input type="checkbox" id="crane3" name="crane3" value="Gunnerus/Crane1/main_boom_angle">
+					<label for="vehicle3"> main boom angle</label><br>
+					<input type="checkbox" id="crane4" name="crane4" value="Gunnerus/Crane1/slewing_angle">
+					<label for="vehicle3"> slewing angle</label><br>
+					<input type="checkbox" id="crane5" name="crane5" value="Gunnerus/Crane1/outer_boom_angle">
+					<label for="vehicle3"> outer boom angle</label><br>
+				</ul>
+			   </li>
+			   <li class="topicList">
+			   <input class="slectButton" type="button" value="Engine 1" name="nav_button2" id="Engine1_button">
+				<ul>
+					<input type="checkbox" id="engine11" name="engine11" value="Gunnerus/Engine1/engine_speed">
+					<label for="vehicle1"> Engine1 speed </label><br>
+					<input type="checkbox" id="engine12" name="engine12" value="Gunnerus/Engine1/fuel_consumption">
+					<label for="vehicle2"> Engine1 fuel consumption</label><br>
+					<input type="checkbox" id="engine13" name="engine13" value="Gunnerus/Engine1/lube_oil_pressure">
+					<label for="vehicle3"> Engine1 lube oil pressure</label><br>
+					<input type="checkbox" id="engine14" name="engine14" value="Gunnerus/Engine1/lube_oil_temperature">
+					<label for="vehicle3"> Engine1 lube oil temperature</label><br>
+					<input type="checkbox" id="engine15" name="engine15" value="Gunnerus/Engine1/coolant_temperature">
+					<label for="vehicle3"> Engine1 coolant temperature</label><br>
+					<input type="checkbox" id="engine16" name="engine16" value="Gunnerus/Engine1/exhaust_temperature1">
+					<label for="vehicle2"> Engine1 exhaust temperature 1 </label><br>
+					<input type="checkbox" id="engine17" name="engine17" value="Gunnerus/Engine1/exhaust_temperature2">
+					<label for="vehicle3"> Engine1 exhaust temperature 2</label><br>
+					<input type="checkbox" id="engine18" name="engine18" value="Gunnerus/Engine1/engine_load">
+					<label for="vehicle3"> Engine1 engine load</label><br>
+					<input type="checkbox" id="engine19" name="engine19" value="Gunnerus/Engine1/boost_pressure">
+					<label for="vehicle3"> Engine1 boost pressure</label><br>
+				</ul>
+			  </li>
+
+			  <li class="topicList">
+				<input class="slectButton" type="button" value="Engine 2" name="nav_button3" id="engine2_button">
+				 <ul>
+					 <input type="checkbox" id="engine21" name="engine21" value="Gunnerus/Engine2/engine_speed">
+					 <label for="vehicle1"> Engine2 speed </label><br>
+					 <input type="checkbox" id="engine22" name="engine22" value="Gunnerus/Engine2/fuel_consumption">
+					 <label for="vehicle2"> Engine2 fuel consumption</label><br>
+					 <input type="checkbox" id="engine23" name="engine23" value="Gunnerus/Engine2/lube_oil_pressure">
+					 <label for="vehicle3"> Engine2 lube oil pressure</label><br>
+					 <input type="checkbox" id="engine24" name="engine24" value="Gunnerus/Engine2/lube_oil_temperature">
+					 <label for="vehicle3"> Engine2 lube oil temperature</label><br>
+					 <input type="checkbox" id="engine25" name="engine25" value="Gunnerus/Engine2/coolant_temperature">
+					 <label for="vehicle3"> Engine2 coolant temperature</label><br>
+					 <input type="checkbox" id="engine26" name="engine26" value="Gunnerus/Engine2/exhaust_temperature1">
+					 <label for="vehicle2"> Engine2 exhaust temperature 1 </label><br>
+					 <input type="checkbox" id="engine27" name="engine27" value="Gunnerus/Engine2/exhaust_temperature2">
+					 <label for="vehicle3"> Engine2 exhaust temperature 2</label><br>
+					 <input type="checkbox" id="engine28" name="engine28" value="Gunnerus/Engine2/engine_load">
+					 <label for="vehicle3"> Engine2 engine load</label><br>
+					 <input type="checkbox" id="engine29" name="engine29" value="Gunnerus/Engine2/boost_pressure">
+					 <label for="vehicle3"> Engine2 boost pressure</label><br>
+				 </ul>
+			   </li>
+
+			   <li class="topicList">
+				<input class="slectButton" type="button" value="Engine 3" name="nav_button4" id="engine3_button">
+				 <ul>
+					 <input type="checkbox" id="engine31" name="engine31" value="Gunnerus/Engine3/engine_speed">
+					 <label for="vehicle1"> Engine3 speed </label><br>
+					 <input type="checkbox" id="engine32" name="engine32" value="Gunnerus/Engine3/fuel_consumption">
+					 <label for="vehicle2"> Engine3 fuel consumption</label><br>
+					 <input type="checkbox" id="engine33" name="engine33" value="Gunnerus/Engine3/lube_oil_pressure">
+					 <label for="vehicle3"> Engine3 lube oil pressure</label><br>
+					 <input type="checkbox" id="engine34" name="engine34" value="Gunnerus/Engine3/lube_oil_temperature">
+					 <label for="vehicle3"> Engine3 lube oil temperature</label><br>
+					 <input type="checkbox" id="engine35" name="engine35" value="Gunnerus/Engine3/coolant_temperature">
+					 <label for="vehicle3"> Engine3 coolant temperature</label><br>
+					 <input type="checkbox" id="engine36" name="engine36" value="Gunnerus/Engine3/exhaust_temperature1">
+					 <label for="vehicle2"> Engine3 exhaust temperature 1 </label><br>
+					 <input type="checkbox" id="engine37" name="engine37" value="Gunnerus/Engine3/exhaust_temperature2">
+					 <label for="vehicle3"> Engine3 exhaust temperature 2</label><br>
+					 <input type="checkbox" id="engine38" name="engine38" value="Gunnerus/Engine3/engine_load">
+					 <label for="vehicle3"> Engine3 engine load</label><br>
+					 <input type="checkbox" id="engine39" name="engine39" value="Gunnerus/Engine3/boost_pressure">
+					 <label for="vehicle3"> Engine3 boost pressure</label><br>
+				 </ul>
+			   </li>
+
+
+			   <input type="button" id="drawButton" value="Draw">
+
+			</ul>
+		  </div>
+		  
+
+		  <div class="chart-container" id="chart1">
+			<canvas id="realTimeFigure1" width="400" height="200"  > </canvas>
+			<canvas id="realTimeFigure2" width="400" height="200" > </canvas>
+			<canvas id="realTimeFigure3" width="400" height="200" > </canvas>
+			<canvas id="realTimeFigure4" width="400" height="200" > </canvas>
+		  </div>
+		  <script  src="{% static '/realTimeFigure.js'%}"> </script>
+
+		</div>
+
+
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "{% static '/crane/build/three.module.js' %}"
+				}
+			}
+		</script>
+
+		<script type="module">
+
+			import * as THREE from 'three';
+
+			import Stats from '/static/crane/Ship_Crane/jsm/libs/stats.module.js';
+			import { GUI } from '/static/crane/Ship_Crane/jsm/libs/lil-gui.module.min.js';
+			import { OrbitControls } from '/static/crane/Ship_Crane/jsm/controls/OrbitControls.js';
+			import { GLTFLoader } from '/static/crane/Ship_Crane/jsm/loaders/GLTFLoader.js';
+			import { Water } from '/static/crane/Ship_Crane/jsm/objects/Water.js';
+			import { Sky } from '/static/crane/Ship_Crane/jsm/objects/Sky.js';
+			import { CSS2DRenderer, CSS2DObject } from '/static/crane/Ship_Crane/jsm/renderers/CSS2DRenderer.js';
+
+			let scene, renderer, camera, stats;
+			let model, skeleton, mixer, clock;
+			let water, sun, DoubleLink1, DoubleLink2,base_ang,d1,d1r,base_ang2,d2,d2r,base_ang3,d3,d3r,YawSupport1,LoadCellHook,base_ang4,d4,d4r,base_ang5,d5,d5r,Tele11,tele,tele2,base_ang6,d6,d6r,Tele2,tele3,base_ang7,d7,d7r,Tele3;
+            let tele4,base_ang8,d8,d8r,Tele4,tele5,base_ang9,d9,d9r,Tele5,tele6,base_ang10,d10,d10r,Tele6,tele7,base_ang11,d11,d11r,Tele7,s1,s2,s3,Yaw,Pitch,Roll;
+
+            const paramx = { 'Live_Data': true };
+
+            function degrees_to_radians(degrees){
+                
+                var pi = Math.PI;
+                return degrees * (pi/180);
+                }
+
+            const parameters2 = {
+                    x:0,
+                    y:0,
+            		Speed:0,
+            		Rudder_Angle:0,
+            	};
+
+            
+            const parameters = {
+                elevation: 2,
+                azimuth: 180,
+            };
+
+
+            const parameters3 = {
+                Double_Link_1: -56,
+                Double_Link_2: -153,
+                Yaw_Support_1:0,
+                Load_Cell_Hook:0,
+                Tele:-2100,
+            };
+
+            //parameters3.Double_Link_1='{{mainBoomAngle}}';
+            //parameters3.Double_Link_2='{{SlewingAngle}}';
+
+
+            const parameters4 = {
+                Yaw: 0,
+                Pitch: 0,
+                Roll:0,
+            };
+
+
+
+			const params = {
+				minScale: 10,
+				maxScale: 20,
+				Live_Data: true,
+				clear: function () {
+
+					removeDecals();
+
+				}
+			};
+
+			const crossFadeControls = [];
+
+			let currentBaseAction = 'Full_Ship';
+			const allActions = [];
+			const baseActions = {
+				Full_Ship: { weight: 1 },
+				Engine: { weight: 0 },
+				Propeller: { weight: 0 }
+			};
+			const additiveActions = {
+				Base_Joint: { weight: 0 },
+				Second_Joint: { weight: 0 },
+				Third_Joint: { weight: 0 },
+				Boom_Length: { weight: 0 }
+			};
+			let panelSettings, numAnimations,light1,light2,light3;
+
+
+			let pox1 = additiveActions.Base_Joint.weight	
+
+            const sphere = new THREE.SphereGeometry( 0.1, 1, 8 );
+            const sphere2 = new THREE.SphereGeometry( 0.3, 1, 8 );
+
+			init();
+
+
+			function init() {
+
+
+				const container = document.getElementById( 'container' );
+				clock = new THREE.Clock();
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0xa0a0a0 );
+				scene.fog = new THREE.Fog( 0xa0a0a0, 20, 100 );
+
+				const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+				hemiLight.position.set( 0, 20, 0 );
+				scene.add( hemiLight );
+
+                //light1 = new THREE.PointLight( 0xff0000, 2, 5 );
+                //light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0000 } ) ) );
+                //light1.position.set( 9.4, 14.5, 0.2 );
+                //scene.add( light1 );
+
+
+                //light2 = new THREE.PointLight( 0x40ff00, 2, 5 );
+                //light2.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x40ff00 } ) ) );
+                //light2.position.set( 9.4, 14.5, 1.65 );
+                //scene.add( light2 );
+
+                //light3 = new THREE.PointLight( 0xFFFFFF, 2, 15 );
+                //light3.add( new THREE.Mesh( sphere2, new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ) );
+                //light3.position.set( 12.2, 10, 0.92 );
+                //scene.add( light3 );
+
+
+
+				const dirLight = new THREE.DirectionalLight( 0xffffff );
+				dirLight.position.set( 3, 10, 10 );
+				dirLight.castShadow = true;
+				dirLight.shadow.camera.top = 2;
+				dirLight.shadow.camera.bottom = - 2;
+				dirLight.shadow.camera.left = - 2;
+				dirLight.shadow.camera.right = 2;
+				dirLight.shadow.camera.near = 0.1;
+				dirLight.shadow.camera.far = 40;
+				scene.add( dirLight );
+
+				// ground
+
+				const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 50, 50 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+				mesh.rotation.x = - Math.PI / 2;
+				mesh.receiveShadow = true;
+				scene.add( mesh );
+
+				// Water
+
+				const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
+
+				water = new Water(
+					waterGeometry,
+					{
+						textureWidth: 512,
+						textureHeight: 512,
+						waterNormals: new THREE.TextureLoader().load( '/static/crane/Ship_Crane/textures/waternormals.jpg', function ( texture ) {
+
+							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+
+						} ),
+						sunDirection: new THREE.Vector3(),
+						sunColor: 0xffffff,
+						waterColor: 0x001e0f,
+						distortionScale: 3.7,
+						fog: scene.fog !== undefined
+					}
+				);
+
+				water.rotation.x = - Math.PI / 2;
+
+				scene.add( water );
+
+				const loader = new GLTFLoader();
+                let d1, d1r;
+				loader.load( '/static/crane/Ship_Crane/models/gltf/assembly.glb', function ( gltf ) {
+					model = gltf.scene;
+					model.position.set(8 ,pox1-3.5,1)
+					scene.add( model );
+                    DoubleLink1 = model.getObjectByName( 'DoubleLink1' );
+                    DoubleLink2 = model.getObjectByName( 'DoubleLink2' );
+                    YawSupport1 = model.getObjectByName( 'YawSupport1' );
+                    LoadCellHook = model.getObjectByName( 'LoadCellHook' );
+                    Tele11 = model.getObjectByName( 'Tele11' );
+                    Tele2 = model.getObjectByName( 'Tele2' );
+                    Tele3 = model.getObjectByName( 'Tele3' );
+                    Tele4 = model.getObjectByName( 'Tele4' );
+                    Tele5 = model.getObjectByName( 'Tele5' );
+                    Tele6 = model.getObjectByName( 'Tele6' );
+                    Tele7 = model.getObjectByName( 'Tele7' );
+
+                    DoubleLink1.rotation.set(0,degrees_to_radians(parameters3.Double_Link_1),0)
+					DoubleLink2.rotation.set(0,degrees_to_radians(parameters3.Double_Link_2),0)
+					LoadCellHook.quaternion.set(0,0,0,0)
+					LoadCellHook.setRotationFromQuaternion(1.0472)
+                    Tele11.position.set(-2100,0,0)
+                    Tele2.position.set(-2100,0,0)
+                    Tele3.position.set(-2100,0,0)
+                    Tele4.position.set(-2100,0,0)
+                    Tele5.position.set(-2100,0,0)
+                    Tele6.position.set(-2100,0,0)
+                    Tele7.position.set(-2100,0,0)
+
+
+					model.traverse( function ( object ) {
+
+						if ( object.isMesh ) object.castShadow = true;
+		
+
+					} );
+
+					const animations = gltf.animations;
+					mixer = new THREE.AnimationMixer( model );
+					numAnimations = animations.length;
+
+					for ( let i = 0; i !== numAnimations; ++ i ) {
+
+						let clip = animations[ i ];
+						const name = clip.name;
+
+						if ( baseActions[ name ] ) {
+
+							const action = mixer.clipAction( clip );
+							activateAction( action );
+							baseActions[ name ].action = action;
+							allActions.push( action );
+
+						} else if ( additiveActions[ name ] ) {
+
+							// Make the clip additive and remove the reference frame
+
+							THREE.AnimationUtils.makeClipAdditive( clip );
+
+							if ( clip.name.endsWith( '_pose' ) ) {
+
+								clip = THREE.AnimationUtils.subclip( clip, clip.name, 2, 3, 30 );
+
+							}
+
+							const action = mixer.clipAction( clip );
+							activateAction( action );
+							additiveActions[ name ].action = action;
+							allActions.push( action );
+
+						}
+
+					}
+
+					createPanel();
+
+					animate();
+                    lights();
+
+				} );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				renderer.shadowMap.enabled = true;
+				container.appendChild( renderer.domElement );
+
+				// camera
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
+				camera.position.set( -10, 40, 40 );
+
+				const controls = new OrbitControls( camera, renderer.domElement );
+				controls.enablePan = false;
+				controls.enableZoom = true;
+                controls.minDistance = 20;
+				controls.maxDistance = 50;
+				controls.target.set( 0, 0, 0 );
+				controls.update();
+
+				stats = new Stats();
+				container.appendChild( stats.dom );
+
+				window.addEventListener( 'resize', onWindowResize );
+
+                
+
+			}
+
+            function set_yaw(){
+                s1 = parameters4.Yaw
+                s2 = parameters4.Pitch
+                s3 = parameters4.Roll
+
+                model.rotation.set(degrees_to_radians(s3),degrees_to_radians(s1),degrees_to_radians(s2))
+            }
+
+
+            function set_base_ang(){
+                d1 = parameters3.Double_Link_1
+                DoubleLink1.rotation.set(0,degrees_to_radians(d1),0)
+            }
+
+            function set_base_ang2(){
+                d2 = parameters3.Double_Link_2
+                DoubleLink2.rotation.set(0,degrees_to_radians(d2),0)
+            }
+
+            function set_base_ang3(){
+                d3 = parameters3.Yaw_Support_1
+                YawSupport1.rotation.set(0,0,degrees_to_radians(d3))
+            }
+
+            function set_base_ang4(){
+                d4 = parameters3.Load_Cell_Hook
+
+				LoadCellHook.quaternion.set(0,0,0,0);
+				LoadCellHook.setRotationFromQuaternion(1.0472)
+
+                //LoadCellHook.rotation.set(0,0,degrees_to_radians(d4))
+                //LoadCellHook.position.set(0,0,0)
+            }
+
+
+            function set_tele1(){
+                d5 = parameters3.Tele
+                Tele11.position.set(d5,0,0)
+                Tele2.position.set(d5,0,0)
+                Tele3.position.set(d5,0,0)
+                Tele4.position.set(d5,0,0)
+                Tele5.position.set(d5,0,0)
+                Tele6.position.set(d5,0,0)
+                Tele7.position.set(d5,0,0)
+            }
+
+
+			function createPanel() {
+
+                let Double_Link_1, Double_Link_2, Yaw_Support_1, Load_Cell_Hook, Tele_1, Tele_2, Tele_3, Tele_4, Tele_5, Tele_6, Tele_7
+
+                const gui = new GUI();
+                const folderCrane = gui.addFolder( 'Crane Control' );
+                folderCrane.add( parameters3, 'Double_Link_1', -56, 10, 0.1 ).onChange( set_base_ang );
+                folderCrane.add( parameters3, 'Double_Link_2', -173, 12, 0.1 ).onChange( set_base_ang2 );
+                folderCrane.add( parameters3, 'Yaw_Support_1', -100, 100, 0.1 ).onChange( set_base_ang3 );
+                folderCrane.add( parameters3, 'Load_Cell_Hook', 0, 350, 0.1 ).onChange( set_base_ang4);
+                folderCrane.add( parameters3, 'Tele', -2100, 60, 0.1 ).onChange( set_tele1);
+            	folderCrane.open();
+
+                const folderShip = gui.addFolder( 'Ship Position Control' );
+                folderShip.add( parameters4, 'Yaw', -30, 30, 0.1 ).onChange(set_yaw );
+                folderShip.add( parameters4, 'Pitch', -2, 2, 0.1 ).onChange( set_yaw);
+                folderShip.add( parameters4, 'Roll', -5, 5, 0.1 ).onChange( set_yaw);
+            	folderShip.open();
+
+                //gui.add( paramx, 'Live_Data' );
+
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+
+			function animate() {
+
+				// Render loop
+
+				requestAnimationFrame( animate );
+
+				for ( let i = 0; i !== numAnimations; ++ i ) {
+
+					const action = allActions[ i ];
+					const clip = action.getClip();
+					const settings = baseActions[ clip.name ] || additiveActions[ clip.name ];
+					settings.weight = action.getEffectiveWeight();
+
+				}
+
+				// Get the time elapsed since the last frame, used for mixer update
+
+				const mixerUpdateDelta = clock.getDelta();
+
+				// Update the animation mixer, the stats panel, and render this frame
+
+				mixer.update( mixerUpdateDelta );
+
+				stats.update();
+
+				renderer.render( scene, camera );
+				water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
+
+			}
+
+		</script>!
+
+	</body>
+</html>

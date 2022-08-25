@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>R/V Gunnerus - Research vessel - NTNU </title>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.js"></script>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<!-- <link rel="stylesheet" href="{% static '/crane/Ship_Crane/main.css' %}" /> -->
+		<link type="text/css" rel="stylesheet" href="{% static '/CraneReal/CraneReal.css' %}">
+    <style>
+			a {
+				color: blue;
+			}
+			.control-inactive button {
+				color: #888;
+			}
+
+		</style>
+	</head>
+	<body>
+        
+
+        <div class="split left" id="left">
+            <div class="centered">
+              <div id="container"></div>
+              <div id="info">
+                <a href="https://www.ntnu.edu/oceans/gunnerus" target="_blank" rel="noopener">NTNU</a> R/V Gunnerus - Research vessel
+                (model from <a href="https://www.ntnu.edu/ihb/intelligent-systems-lab" target="_blank" rel="noopener">Intelligent Systems Lab</a>)<br/>
+              </div>
+          
+              <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+          
+              <script type="importmap">
+                {
+                  "imports": {
+                    "three": "https://unpkg.com/three@0.138.0/build/three.module.js",
+                    "OrbitControls": "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js"
+                  }
+                }
+              </script>
+              <script src= "{% static '/CraneReal/ship.js' %}" type="module">  
+              </script>
+            </div>
+            <div class="resizer-r"></div>
+        </div>
+            
+        <div class="split rightUp" id="rightUp">
+          <input class="drawButton" type="button" id="drawButton" value="Draw">
+            <div class="topicSelection">
+                    
+                    <input class="slectButton" type="button" value="Crane", name="nav_button1" id="CraneButton">
+                    <div class="subtopicList" id="CraneList">
+                          <input type="checkbox" id="crane1" name="crane1" value="Gunnerus/Crane1/dp_main_cyl">
+                          <label for="vehicle1"> pressure of main cylinder </label><br>
+                          <input type="checkbox" id="crane2" name="crane2" value="Gunnerus/Crane1/extension_length_outer_boom">
+                          <label for="vehicle2"> outer boom extension length</label><br>
+                          <input type="checkbox" id="crane3" name="crane3" value="Gunnerus/Crane1/main_boom_angle">
+                          <label for="vehicle3"> main boom angle</label><br>
+                          <input type="checkbox" id="crane4" name="crane4" value="Gunnerus/Crane1/slewing_angle">
+                          <label for="vehicle3"> slewing angle</label><br>
+                          <input type="checkbox" id="crane5" name="crane5" value="Gunnerus/Crane1/outer_boom_angle">
+                          <label for="vehicle3"> outer boom angle</label><br>
+                    </div>
+
+                    <input class="slectButton" type="button" value="Engine" name="nav_button2" id="engine_button">
+                    <div class="subtopicList" id="EngineList" style="display: none;">
+                      <input type="checkbox" id="engine1" name="engine1" value="engineXengine_speed"]>
+                      <label for="vehicle1"> engine speed </label><br>
+                      <input type="checkbox" id="engine2" name="engine2" value="engineXfuel_consumption">
+                      <label for="vehicle2"> engine fuel consumption</label><br>
+                      <input type="checkbox" id="engine3" name="engine3" value="engineXlube_oil_pressure">
+                      <label for="vehicle3"> engine lube oil pressure</label><br>
+                      <input type="checkbox" id="engine4" name="engine4" value="engineXlube_oil_temperature">
+                      <label for="vehicle3"> engine lube oil temperature</label><br>
+                      <input type="checkbox" id="engine5" name="engine5" value="engineXcoolant_temperature">
+                      <label for="vehicle3"> engine coolant temperature</label><br>
+                      <input type="checkbox" id="engine6" name="engine6" value="engineXexhaust_temperature1">
+                      <label for="vehicle2"> engine exhaust temperature 1 </label><br>
+                      <input type="checkbox" id="engine7" name="engine7" value="engineXexhaust_temperature2">
+                      <label for="vehicle3"> engine exhaust temperature 2</label><br>
+                      <input type="checkbox" id="engine8" name="engine8" value="engineXengine_load">
+                      <label for="vehicle3"> engine engine load</label><br>
+                      <input type="checkbox" id="engine9" name="engine9" value="engineXboost_pressure">
+                      <label for="vehicle3"> engine boost pressure</label><br>
+
+                    </div>
+      
+                    <!-- <input class="slectButton" type="button" value="Engine 2" name="nav_button3" id="engine2_button">
+                    <div class="subtopicList" id="Engine2List">
+                           <input type="checkbox" id="engine21" name="engine21" value="Gunnerus/Engine2/engine_speed">
+                           <label for="vehicle1"> Engine2 speed </label><br>
+                           <input type="checkbox" id="engine22" name="engine22" value="Gunnerus/Engine2/fuel_consumption">
+                           <label for="vehicle2"> Engine2 fuel consumption</label><br>
+                           <input type="checkbox" id="engine23" name="engine23" value="Gunnerus/Engine2/lube_oil_pressure">
+                           <label for="vehicle3"> Engine2 lube oil pressure</label><br>
+                           <input type="checkbox" id="engine24" name="engine24" value="Gunnerus/Engine2/lube_oil_temperature">
+                           <label for="vehicle3"> Engine2 lube oil temperature</label><br>
+                           <input type="checkbox" id="engine25" name="engine25" value="Gunnerus/Engine2/coolant_temperature">
+                           <label for="vehicle3"> Engine2 coolant temperature</label><br>
+                           <input type="checkbox" id="engine26" name="engine26" value="Gunnerus/Engine2/exhaust_temperature1">
+                           <label for="vehicle2"> Engine2 exhaust temperature 1 </label><br>
+                           <input type="checkbox" id="engine27" name="engine27" value="Gunnerus/Engine2/exhaust_temperature2">
+                           <label for="vehicle3"> Engine2 exhaust temperature 2</label><br>
+                           <input type="checkbox" id="engine28" name="engine28" value="Gunnerus/Engine2/engine_load">
+                           <label for="vehicle3"> Engine2 engine load</label><br>
+                           <input type="checkbox" id="engine29" name="engine29" value="Gunnerus/Engine2/boost_pressure">
+                           <label for="vehicle3"> Engine2 boost pressure</label><br>
+                    </div>
+                     
+                    <input class="slectButton" type="button" value="Engine 3" name="nav_button4" id="engine3_button">
+                    <div class="subtopicList" id="Engine3List">
+                           <input type="checkbox" id="engine31" name="engine31" value="Gunnerus/Engine3/engine_speed">
+                           <label for="vehicle1"> Engine3 speed </label><br>
+                           <input type="checkbox" id="engine32" name="engine32" value="Gunnerus/Engine3/fuel_consumption">
+                           <label for="vehicle2"> Engine3 fuel consumption</label><br>
+                           <input type="checkbox" id="engine33" name="engine33" value="Gunnerus/Engine3/lube_oil_pressure">
+                           <label for="vehicle3"> Engine3 lube oil pressure</label><br>
+                           <input type="checkbox" id="engine34" name="engine34" value="Gunnerus/Engine3/lube_oil_temperature">
+                           <label for="vehicle3"> Engine3 lube oil temperature</label><br>
+                           <input type="checkbox" id="engine35" name="engine35" value="Gunnerus/Engine3/coolant_temperature">
+                           <label for="vehicle3"> Engine3 coolant temperature</label><br>
+                           <input type="checkbox" id="engine36" name="engine36" value="Gunnerus/Engine3/exhaust_temperature1">
+                           <label for="vehicle2"> Engine3 exhaust temperature 1 </label><br>
+                           <input type="checkbox" id="engine37" name="engine37" value="Gunnerus/Engine3/exhaust_temperature2">
+                           <label for="vehicle3"> Engine3 exhaust temperature 2</label><br>
+                           <input type="checkbox" id="engine38" name="engine38" value="Gunnerus/Engine3/engine_load">
+                           <label for="vehicle3"> Engine3 engine load</label><br>
+                           <input type="checkbox" id="engine39" name="engine39" value="Gunnerus/Engine3/boost_pressure">
+                           <label for="vehicle3"> Engine3 boost pressure</label><br>
+                    </div> -->
+                     
+                    <input class="slectButton" type="button" value="Enviroment" name="nav_button5" id="enviroment_button">
+                    <div class="subtopicList" id="EnviromentList">
+                            <input type="checkbox" id="Enviroment1" name="Enviroment1" value="Gunnerus/dpWind/Wind_Speed">
+                            <label for="vehicle1"> Wind Speed </label><br>
+                            <input type="checkbox" id="Enviroment2" name="Enviroment2" value="Gunnerus/SeapathGPSGga/Longitude">
+                            <label for="vehicle2"> Gunnerus's Longitude </label><br>
+                            <input type="checkbox" id="Enviroment3" name="Enviroment3" value="Gunnerus/SeapathGPSGga/Latitude">
+                            <label for="vehicle3"> Gunnerus's Latitude </label><br>
+                            <input type="checkbox" id="Enviroment4" name="Enviroment4" value="Gunnerus/SeapathGPSVtg/SpeedKmHr">
+                            <label for="vehicle3"> Gunnerus's speed (Km/Hr) </label><br>
+                            <input type="checkbox" id="Enviroment5" name="Enviroment5" value="Gunnerus/SeapathGPSVtg/SpeedKnots">
+                            <label for="vehicle3"> Gunnerus's speed (knots) </label><br>
+                            <input type="checkbox" id="Enviroment6" name="Enviroment6" value="Gunnerus/SeapathGPSVtg/CourseTrue">
+                            <label for="vehicle2"> Gunnerus's course </label><br>
+                            <input type="checkbox" id="Enviroment7" name="Enviroment7" value="Gunnerus/SeapathGPSVbw/LonGroundSpeed">
+                            <label for="vehicle3"> Gunnerus's Lon Ground Speed </label><br>
+                            <input type="checkbox" id="Enviroment8" name="Enviroment8" value="Gunnerus/SeapathGPSVbw/TransGroundSpeed">
+                            <label for="vehicle3"> Gunnerus's Trans Grund Speed </label><br>
+                    </div>
+
+                    <input class="slectButton" type="button" value="Ship Motion", name="nav_button6" id="shipButton">
+                    <div class="subtopicList" id="ShipList">
+                        <input type="checkbox" id="ship1" name="ship1" value="Gunnerus/SeapathMRU_rates/VertVel">
+                        <label for="vehicle1"> MRU Vert Velocity</label><br>
+                        <input type="checkbox" id="ship2" name="ship2" value="Gunnerus/SeapathMRU_rates/RollRate">
+                        <label for="vehicle2"> MRU Roll Rate</label><br>
+                        <input type="checkbox" id="ship3" name="ship3" value="Gunnerus/SeapathMRU_rates/YawRate">
+                        <label for="vehicle3"> MRU YAW Rate</label><br>
+                        <input type="checkbox" id="ship4" name="ship4" value="Gunnerus/SeapathMRU_rates/PitchRate">
+                        <label for="vehicle3"> MRU Pitch Rate</label><br>
+                        <input type="checkbox" id="ship5" name="ship5" value="Gunnerus/SeapathMRU/Heave">
+                        <label for="vehicle3"> MRU Heave</label><br>
+                        <input type="checkbox" id="ship6" name="ship6" value="Gunnerus/SeapathMRU/Pitch">
+                        <label for="vehicle1"> MRU Pitch</label><br>
+                        <input type="checkbox" id="ship7" name="ship7" value="Gunnerus/SeapathMRU/Roll">
+                        <label for="vehicle2"> MRU Roll</label><br>
+                        <input type="checkbox" id="ship8" name="ship8" value="Gunnerus/SeapathMRU/Heading">
+                        <label for="vehicle3"> MRU Heaading</label><br>
+                        <input type="checkbox" id="ship9" name="ship9" value="Gunnerus/hcx_port_mp/Power_mode_RPM_Mode">
+                        <label for="vehicle3"> MRU Power Mode Per Mode</label><br>
+                        <input type="checkbox" id="ship10" name="ship10" value="Gunnerus/hcx_port_mp/LoadFeedback">
+                        <label for="vehicle3"> HCX Load Feedback</label><br>
+                        <input type="checkbox" id="ship11" name="ship11" value="Gunnerus/hcx_port_mp/AzimuthFeedback">
+                        <label for="vehicle1"> HCX Azimuth Feedback</label><br>
+                        <input type="checkbox" id="ship12" name="ship12" value="Gunnerus/hcx_port_mp/Running">
+                        <label for="vehicle2"> HCX Running</label><br>
+                        <input type="checkbox" id="ship13" name="ship13" value="Gunnerus/hcx_port_mp/RPMOrder">
+                        <label for="vehicle3"> HCX RPMOrder</label><br>
+                        <input type="checkbox" id="ship14" name="ship14" value="Gunnerus/hcx_port_mp/Maneuver_Transit_mode">
+                        <label for="vehicle3"> HCX Maneuver Transit Mode</label><br>
+                        <input type="checkbox" id="ship15" name="ship15" value="Gunnerus/hcx_port_mp/Level_order">
+                        <label for="vehicle3"> HCX Level Order</label><br>
+                        <input type="checkbox" id="ship16" name="ship16" value="Gunnerus/hcx_port_mp/AzimuthOrder">
+                        <label for="vehicle1"> HCX Azimuth Order</label><br>
+                        <input type="checkbox" id="ship17" name="ship17" value="Gunnerus/hcx_port_mp/RPMFeedback">
+                        <label for="vehicle2"> HCX RPM Feedback</label><br>
+                        <input type="checkbox" id="ship18" name="ship18" value="Gunnerus/hcx_stbd_mp/RPMOrder">
+                        <label for="vehicle3"> HCX STBD RPM order</label><br>
+                        <input type="checkbox" id="ship19" name="ship19" value="Gunnerus/hcx_stbd_mp/Running">
+                        <label for="vehicle3"> HCX STBD Running</label><br>
+                        <input type="checkbox" id="ship20" name="ship20" value="Gunnerus/hcx_stbd_mp/Power_mode_RPM_Mode">
+                        <label for="vehicle3"> HCX STBD Power Mode per RPM Mode</label><br>
+                        <input type="checkbox" id="ship21" name="ship21" value="Gunnerus/hcx_stbd_mp/LoadFeedback">
+                        <label for="vehicle1"> HCX STBD Load Feedback</label><br>
+                        <input type="checkbox" id="ship22" name="ship22" value="Gunnerus/hcx_stbd_mp/RPMFeedback">
+                        <label for="vehicle2"> HCX STBD RPM Feedback</label><br>
+                        <input type="checkbox" id="ship23" name="ship23" value="Gunnerus/hcx_stbd_mp/AzimuthFeedback">
+                        <label for="vehicle3"> HCX STBD Azimuth Feedback</label><br>
+                        <input type="checkbox" id="ship24" name="ship24" value="Gunnerus/hcx_stbd_mp/AzimuthOrder">
+                        <label for="vehicle3"> HCX STBD Azimuth Order</label><br>
+                        <input type="checkbox" id="ship25" name="ship25" value="Gunnerus/hcx_stbd_mp/Maneuver_Transit_mode">
+                        <label for="vehicle3"> HCX STBD Maneuver Transit mode</label><br>
+                        <input type="checkbox" id="ship26" name="ship26" value="Gunnerus/hcx_stbd_mp/Level_order">
+                        <label for="vehicle1"> HCX STBD Level Order</label><br>
+                        <input type="checkbox" id="ship27" name="ship27" value="Gunnerus/dpThruster/FeedbackProsent">
+                        <label for="vehicle2"> Thruster Feedback Prosent</label><br>
+                        <input type="checkbox" id="ship28" name="ship28" value="Gunnerus/dpThruster/ThrusterSetpunktProsent">
+                        <label for="vehicle3"> Thruster Setpunkt Prosent</label><br>
+                    </div>
+
+                    <button class="slectButton" id="AISButton">AIS</button>
+                    <div class="subtopicList" id="AISList">
+                          <input type="checkbox" id="AIS1" name="AIS1" value="AIVDM/speed">
+                          <label for="vehicle1"> AIS speed </label><br>
+                          <input type="checkbox" id="AIS2" name="AIS2" value="AIVDM/latitude">
+                          <label for="vehicle2"> AIS latitude</label><br>
+                          <input type="checkbox" id="AIS3" name="AIS3" value="AIVDM/longitude">
+                          <label for="vehicle3"> AIS longitude</label><br>
+                          <input type="checkbox" id="AIS4" name="AIS4" value="AIVDM/course">
+                          <label for="vehicle3"> AIS course</label><br>
+                    </div>
+            </div>
+        </div>
+
+        <input class="split Reset" type="button" id="resetButton" value="Reset">
+
+
+
+        <div class="split rightDown" id="rightDown">
+            <div class="chart-container" id="chart1">
+                <canvas class="figure_container" id="realTimeFigure1"> </canvas>
+                <canvas class="figure_container" id="realTimeFigure2"> </canvas>
+                <canvas class="figure_container"  id="realTimeFigure3"> </canvas>
+                <canvas class="figure_container"  id="realTimeFigure4"> </canvas>
+                <canvas class="figure_container" id="realTimeFigure5"> </canvas>
+                <canvas class="figure_container" id="realTimeFigure6"> </canvas>
+                <canvas class="figure_container"  id="realTimeFigure7"> </canvas>
+                <canvas class="figure_container"  id="realTimeFigure8"> </canvas>
+                <canvas class="figure_container" id="realTimeFigure9"> </canvas>
+                <canvas class="figure_container" id="realTimeFigure10"> </canvas>
+                <canvas class="figure_container"  id="realTimeFigure11"> </canvas>
+                <canvas class="figure_container"  id="realTimeFigure12"> </canvas>
+                <canvas class="figure_container" id="realTimeFigure13"> </canvas>
+                <canvas class="figure_container" id="realTimeFigure14"> </canvas>
+                <canvas class="figure_container"  id="realTimeFigure15"> </canvas>
+                <canvas class="figure_container"  id="realTimeFigure16"> </canvas>
+              </div>
+              
+        </div>
+                
+            
+        <script src="{% static '/CraneReal/ListShow.js'%}"> </script>
+        <script  src="{% static '/realTimeFigure.js'%}"> </script>
+
+		<!-- <div class="figures" align="right" style="top: 3em;">
+		<div class="topicSelection">
+			<ul>
+			  <li class="topicList"> 
+				<input class="slectButton" type="button" value="Crane" name="slect_button" id="crane_button">
+				<ul>
+					<input type="checkbox" id="crane1" name="crane1" value="Gunnerus/Crane1/dp_main_cyl">
+					<label for="vehicle1"> pressure of main cylinder </label><br>
+					<input type="checkbox" id="crane2" name="crane2" value="Gunnerus/Crane1/extension_length_outer_boom">
+					<label for="vehicle2"> outer boom extension length</label><br>
+					<input type="checkbox" id="crane3" name="crane3" value="Gunnerus/Crane1/main_boom_angle">
+					<label for="vehicle3"> main boom angle</label><br>
+					<input type="checkbox" id="crane4" name="crane4" value="Gunnerus/Crane1/slewing_angle">
+					<label for="vehicle3"> slewing angle</label><br>
+					<input type="checkbox" id="crane5" name="crane5" value="Gunnerus/Crane1/outer_boom_angle">
+					<label for="vehicle3"> outer boom angle</label><br>
+				</ul>
+			   </li>
+			   <li class="topicList">
+			   <input class="slectButton" type="button" value="Engine 1" name="nav_button2" id="Engine1_button">
+				<ul>
+					<input type="checkbox" id="engine11" name="engine11" value="Gunnerus/Engine1/engine_speed">
+					<label for="vehicle1"> Engine1 speed </label><br>
+					<input type="checkbox" id="engine12" name="engine12" value="Gunnerus/Engine1/fuel_consumption">
+					<label for="vehicle2"> Engine1 fuel consumption</label><br>
+					<input type="checkbox" id="engine13" name="engine13" value="Gunnerus/Engine1/lube_oil_pressure">
+					<label for="vehicle3"> Engine1 lube oil pressure</label><br>
+					<input type="checkbox" id="engine14" name="engine14" value="Gunnerus/Engine1/lube_oil_temperature">
+					<label for="vehicle3"> Engine1 lube oil temperature</label><br>
+					<input type="checkbox" id="engine15" name="engine15" value="Gunnerus/Engine1/coolant_temperature">
+					<label for="vehicle3"> Engine1 coolant temperature</label><br>
+					<input type="checkbox" id="engine16" name="engine16" value="Gunnerus/Engine1/exhaust_temperature1">
+					<label for="vehicle2"> Engine1 exhaust temperature 1 </label><br>
+					<input type="checkbox" id="engine17" name="engine17" value="Gunnerus/Engine1/exhaust_temperature2">
+					<label for="vehicle3"> Engine1 exhaust temperature 2</label><br>
+					<input type="checkbox" id="engine18" name="engine18" value="Gunnerus/Engine1/engine_load">
+					<label for="vehicle3"> Engine1 engine load</label><br>
+					<input type="checkbox" id="engine19" name="engine19" value="Gunnerus/Engine1/boost_pressure">
+					<label for="vehicle3"> Engine1 boost pressure</label><br>
+				</ul>
+			  </li>
+
+			  <li class="topicList">
+				<input class="slectButton" type="button" value="Engine 2" name="nav_button3" id="engine2_button">
+				 <ul>
+					 <input type="checkbox" id="engine21" name="engine21" value="Gunnerus/Engine2/engine_speed">
+					 <label for="vehicle1"> Engine2 speed </label><br>
+					 <input type="checkbox" id="engine22" name="engine22" value="Gunnerus/Engine2/fuel_consumption">
+					 <label for="vehicle2"> Engine2 fuel consumption</label><br>
+					 <input type="checkbox" id="engine23" name="engine23" value="Gunnerus/Engine2/lube_oil_pressure">
+					 <label for="vehicle3"> Engine2 lube oil pressure</label><br>
+					 <input type="checkbox" id="engine24" name="engine24" value="Gunnerus/Engine2/lube_oil_temperature">
+					 <label for="vehicle3"> Engine2 lube oil temperature</label><br>
+					 <input type="checkbox" id="engine25" name="engine25" value="Gunnerus/Engine2/coolant_temperature">
+					 <label for="vehicle3"> Engine2 coolant temperature</label><br>
+					 <input type="checkbox" id="engine26" name="engine26" value="Gunnerus/Engine2/exhaust_temperature1">
+					 <label for="vehicle2"> Engine2 exhaust temperature 1 </label><br>
+					 <input type="checkbox" id="engine27" name="engine27" value="Gunnerus/Engine2/exhaust_temperature2">
+					 <label for="vehicle3"> Engine2 exhaust temperature 2</label><br>
+					 <input type="checkbox" id="engine28" name="engine28" value="Gunnerus/Engine2/engine_load">
+					 <label for="vehicle3"> Engine2 engine load</label><br>
+					 <input type="checkbox" id="engine29" name="engine29" value="Gunnerus/Engine2/boost_pressure">
+					 <label for="vehicle3"> Engine2 boost pressure</label><br>
+				 </ul>
+			   </li>
+
+			   <li class="topicList">
+				<input class="slectButton" type="button" value="Engine 3" name="nav_button4" id="engine3_button">
+				 <ul>
+					 <input type="checkbox" id="engine31" name="engine31" value="Gunnerus/Engine3/engine_speed">
+					 <label for="vehicle1"> Engine3 speed </label><br>
+					 <input type="checkbox" id="engine32" name="engine32" value="Gunnerus/Engine3/fuel_consumption">
+					 <label for="vehicle2"> Engine3 fuel consumption</label><br>
+					 <input type="checkbox" id="engine33" name="engine33" value="Gunnerus/Engine3/lube_oil_pressure">
+					 <label for="vehicle3"> Engine3 lube oil pressure</label><br>
+					 <input type="checkbox" id="engine34" name="engine34" value="Gunnerus/Engine3/lube_oil_temperature">
+					 <label for="vehicle3"> Engine3 lube oil temperature</label><br>
+					 <input type="checkbox" id="engine35" name="engine35" value="Gunnerus/Engine3/coolant_temperature">
+					 <label for="vehicle3"> Engine3 coolant temperature</label><br>
+					 <input type="checkbox" id="engine36" name="engine36" value="Gunnerus/Engine3/exhaust_temperature1">
+					 <label for="vehicle2"> Engine3 exhaust temperature 1 </label><br>
+					 <input type="checkbox" id="engine37" name="engine37" value="Gunnerus/Engine3/exhaust_temperature2">
+					 <label for="vehicle3"> Engine3 exhaust temperature 2</label><br>
+					 <input type="checkbox" id="engine38" name="engine38" value="Gunnerus/Engine3/engine_load">
+					 <label for="vehicle3"> Engine3 engine load</label><br>
+					 <input type="checkbox" id="engine39" name="engine39" value="Gunnerus/Engine3/boost_pressure">
+					 <label for="vehicle3"> Engine3 boost pressure</label><br>
+				 </ul>
+			   </li>
+
+
+			   <input type="button" id="drawButton" value="Draw">
+
+			</ul>
+		  </div>
+		  
+
+		  <div class="chart-container" id="chart1">
+			<canvas id="realTimeFigure1" width="400" height="200"  > </canvas>
+			<canvas id="realTimeFigure2" width="400" height="200" > </canvas>
+			<canvas id="realTimeFigure3" width="400" height="200" > </canvas>
+			<canvas id="realTimeFigure4" width="400" height="200" > </canvas>
+		  </div>
+		  <script  src="{% static '/realTimeFigure.js'%}"> </script>
+
+		</div> -->
+
+	</body>
+</html>
