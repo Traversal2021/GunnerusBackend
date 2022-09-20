@@ -11,8 +11,8 @@ body{
     background: #222237;
 }
 .menu{
-    top: 0px;
-    left: 10vw;
+    top: 15px;
+    right: 20%;
     position: absolute;
     width: 300px;
     height: 300px;
@@ -386,7 +386,7 @@ body{
     background-color: #FFF;
     border-radius: 6px;
     position: absolute;
-    top: 25%;
+    top: 15%;
     left: 12%;
 	max-width: 1px;
 	height: 1px;

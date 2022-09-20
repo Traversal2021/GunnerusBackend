@@ -112,18 +112,18 @@
 }
 
 .drawButton {
-    position: fixed;
-    top: 0;
-    right: 0;
+    /* position: fixed; */
+    /* top: -10; */
+    /* right: 0; */
     height:7%;
-    width:30%;
+    width:100%;
     border:none;
     background: #7c7c7c;
     opacity: 70%;
     color: white;
     cursor: pointer;
     font-size: larger;
-    display:block;
+    display:inline-block;
     transition: 0.25 ease-in-out;
 }
 

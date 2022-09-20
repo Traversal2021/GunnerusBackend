@@ -148,7 +148,7 @@ def searchDatabase(startTime,endTime,topic):
 
     try:
         ps_connection = psycopg2.connect(
-            host='localhost',
+            host='10.53.97.152',
             dbname='postgres',
             user='myuser',
             password='iot',
@@ -163,6 +163,8 @@ def searchDatabase(startTime,endTime,topic):
         table_name_st = cursor.fetchall()[-1]
         cursor.execute("""SELECT table_name FROM managetables WHERE  '%s' < end_time and devices = '%s'""" % (endTime , classification))
         table_name_en = cursor.fetchall()
+
+        print(table_name_en)
         
         if len(table_name_en)==0:
             table_name_en.append( table_name_al[-1])
@@ -206,7 +208,7 @@ def TimelineData(startTime,endTime, constrain):
 
     try:
         ps_connection = psycopg2.connect(
-            host='localhost',
+            host='10.53.97.152',
             dbname='postgres',
             user='myuser',
             password='iot',
@@ -299,7 +301,7 @@ def advanceSearchDatabase(startTime,endTime,topic, constrain):
 
     try:
         ps_connection = psycopg2.connect(
-            host='localhost',
+            host='10.53.97.152',
             dbname='postgres',
             user='myuser',
             password='iot',
@@ -351,13 +353,12 @@ def advanceSearchDatabase(startTime,endTime,topic, constrain):
             print("PostgreSQL connection is closed")
             return HistoricalFiguredata
 
-
 def TimelineDatawe(startTime,endTime):
     table_name_tem=[]
     timelinedata={}
     try:
         ps_connection = psycopg2.connect(
-            host='localhost',
+            host='10.53.97.152',
             dbname='postgres',
             user='myuser',
             password='iot',

@@ -35,6 +35,6 @@ urlpatterns = [
     path('timelineData/<str:info>',historyicalData.timelineData),
     path('advanceSearch/<str:info>',historyicalData.advancedSearch),
     path('shipmotion/',shipmotion.shipmotion),
-    path('shipmotion2/',shipmotion.shipmotion2),
+    path('shipmotion2/',shipmotion.shipmotion2)
 
 ]

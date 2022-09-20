@@ -162,7 +162,7 @@ a, button, input, select {
 }
 
 .left {
-    width: 70%;
+    width: 100%;
     height: 100%;
     left: 0;
     top: 0;
@@ -174,7 +174,7 @@ a, button, input, select {
     top: 0;
     right: 0;
     height:7%;
-    width:20%;
+    width:100%;
     border:none;
     background: #7c7c7c;
     opacity: 70%;
@@ -189,7 +189,7 @@ a, button, input, select {
     top: 8%;
     right: 0;
     height:7%;
-    width:20%;
+    width:100%;
     border:none;
     background: #7c7c7c;
     opacity: 70%;
@@ -216,31 +216,32 @@ a, button, input, select {
     right: 0;
     top: 0;
     background-color: #b1b695;
-    display: block;
+    display: none;
 }
 
 .rightDown {
-    width: 20%;
-    height: 93%;
-    right: 0;
-    top: 16%;
+    width: 30%;
+    height: 100%;
+    right:0;
+    /* right: 0;
+    top: 16%; */
     background-color: #fcd0a1;
     display: none;
 }
 
 .drawButton {
-    position: fixed;
+    display:inline-block;
+    /* position: fixed; */
     top: 0;
-    right: 0;
+    /* right: 0; */
     height:7%;
-    width:20%;
+    width:100%;
     border:none;
     background: #7c7c7c;
     opacity: 70%;
     color: white;
     cursor: pointer;
-    font-size: larger;
-    display:block;
+    font-size: larger;   
     transition: 0.25 ease-in-out;
 }
 
@@ -271,7 +272,7 @@ a, button, input, select {
 
 /* .tl-storyslider { display:none;} */
 #visualization {
-    display: block;
+    display: none;
     top: 10%;
     width: 100%;
     height: 20%;
@@ -327,6 +328,6 @@ a, button, input, select {
     width:200px;
 	height:30px;
     margin-right: 1%;
-    display: inlinr-block;
+    display: inline-block;
 }
 

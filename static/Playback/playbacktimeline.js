@@ -1,45 +1,45 @@
-// get elements 
-// var startTimePicker=document.getElementById('startTime');
-// var endTimePicker=document.getElementById('endTime');
-//var timePicker = document.getElementById('timeSubmit');
-var timePicker = document.getElementById('get_data');
-// var oneHour = document.getElementById('oneHour');
-// var oneDay = document.getElementById('oneDay');
-// var oneWeek = document.getElementById('oneWeek');
+//get elements 
+var startTimePicker=document.getElementById('startTime');
+var endTimePicker=document.getElementById('endTime');
+var timePicker = document.getElementById('timeSubmit');
+//var timePicker = document.getElementById('get_data');
+var oneHour = document.getElementById('oneHour');
+var oneDay = document.getElementById('oneDay');
+var oneWeek = document.getElementById('oneWeek');
 var downloadButton = document.getElementById("downloadButton");
 
-// var today = new Date().toISOString().slice(0,16);
-// endTimePicker.max = today;
-// console.log(today);
+var today = new Date().toISOString().slice(0,16);
+endTimePicker.max = today;
+console.log(today);
 
-// startTimePicker.addEventListener("change",(Event)=>{
-//   let newStartDate = new Date(startTimePicker.value);
-//   let tempDate = new Date(startTimePicker.value);
-//   let newEndDate = new Date(tempDate.setDate(tempDate.getDate()+7));
-//   endTimePicker.min = newStartDate.toISOString().slice(0,16);
-//   endTimePicker.max = newEndDate.toISOString().slice(0,16);
-// })
+startTimePicker.addEventListener("change",(Event)=>{
+  let newStartDate = new Date(startTimePicker.value);
+  let tempDate = new Date(startTimePicker.value);
+  let newEndDate = new Date(tempDate.setDate(tempDate.getDate()+7));
+  endTimePicker.min = newStartDate.toISOString().slice(0,16);
+  endTimePicker.max = newEndDate.toISOString().slice(0,16);
+})
 
-// oneHour.onclick = function (){
-//   let nowTime = new Date();
-//   let newStartDate2 = new Date(nowTime.setHours(nowTime.getHours()-1));
-//   endTimePicker.value = new Date().toISOString().slice(0,16);
-//   startTimePicker.value = newStartDate2.toISOString().slice(0,16);
-// }
+oneHour.onclick = function (){
+  let nowTime = new Date();
+  let newStartDate2 = new Date(nowTime.setHours(nowTime.getHours()-1));
+  endTimePicker.value = new Date().toISOString().slice(0,16);
+  startTimePicker.value = newStartDate2.toISOString().slice(0,16);
+}
 
-// oneDay.onclick = function (){
-//   let nowTime = new Date();
-//   let newStartDate2 = new Date(nowTime.setDate(nowTime.getDate()-1));
-//   endTimePicker.value = new Date().toISOString().slice(0,16);
-//   startTimePicker.value = newStartDate2.toISOString().slice(0,16);
-// }
+oneDay.onclick = function (){
+  let nowTime = new Date();
+  let newStartDate2 = new Date(nowTime.setDate(nowTime.getDate()-1));
+  endTimePicker.value = new Date().toISOString().slice(0,16);
+  startTimePicker.value = newStartDate2.toISOString().slice(0,16);
+}
 
-// oneWeek.onclick = function (){
-//   let nowTime = new Date();
-//   let newStartDate2 = new Date(nowTime.setDate(nowTime.getDate()-7));
-//   endTimePicker.value = new Date().toISOString().slice(0,16);
-//   startTimePicker.value = newStartDate2.toISOString().slice(0,16);
-// }
+oneWeek.onclick = function (){
+  let nowTime = new Date();
+  let newStartDate2 = new Date(nowTime.setDate(nowTime.getDate()-7));
+  endTimePicker.value = new Date().toISOString().slice(0,16);
+  startTimePicker.value = newStartDate2.toISOString().slice(0,16);
+}
 
 var figureStart,figureEnd;
 
@@ -65,7 +65,7 @@ var options = {
 };
 
 // starting draw timeline
-timePicker.onclick=function(){
+// timePicker.onclick=function(){
   // let day_month = selectedMonth+1
 
   // var start_H = parseInt(document.getElementById("start_hours").value);  
@@ -75,39 +75,39 @@ timePicker.onclick=function(){
   // var end_H = parseInt(document.getElementById("end_hours").value); 
   // var end_minz = parseInt(document.getElementById("end_min").value);  
 
-    const selected_date_element = document.querySelector('.date-picker .selected-date');
-    var selected_date = new Date(selected_date_element.dataset.value)
-    //var selectd_date = selected_date_time.getDate()
-    var start_hour = document.getElementById("start_hours").value
-    var start_min = document.getElementById("start_min").value
-    var end_hour = document.getElementById("end_hours").value
-    var end_min = document.getElementById("end_min").value
-    var start_time = new Date(
-                                selected_date.getFullYear(), 
-                                selected_date.getMonth(), 
-                                selected_date.getDate(), 
-                                start_hour, 
-                                start_min
-                                )
-  var end_time = new Date(
-                                  selected_date.getFullYear(), 
-                                  selected_date.getMonth(), 
-                                  selected_date.getDate(), 
-                                  end_hour, 
-                                  end_min
-                                  )
-    // let startTime = startTimePicker.value;
-    // let endTime = endTimePicker.value;
-    var speedConstrain = -1+"< value and value <" + 5000 + "and topicid in (6,15,24)";
-    options["min"]=start_time;
-    options["max"]=end_time;
+  //   const selected_date_element = document.querySelector('.date-picker .selected-date');
+  //   var selected_date = new Date(selected_date_element.dataset.value)
+  //   var selectd_date = selected_date_time.getDate()
+  //   var start_hour = document.getElementById("start_hours").value
+  //   var start_min = document.getElementById("start_min").value
+  //   var end_hour = document.getElementById("end_hours").value
+  //   var end_min = document.getElementById("end_min").value
+  //   var start_time = new Date(
+  //                               selected_date.getFullYear(), 
+  //                               selected_date.getMonth(), 
+  //                               selected_date.getDate(), 
+  //                               start_hour, 
+  //                               start_min
+  //                               )
+  // var end_time = new Date(
+  //                                 selected_date.getFullYear(), 
+  //                                 selected_date.getMonth(), 
+  //                                 selected_date.getDate(), 
+  //                                 end_hour, 
+  //                                 end_min
+  //                                 )
+//     let startTime = startTimePicker.value;
+//     let endTime = endTimePicker.value;
+//     var speedConstrain = -1+"< value and value <" + 5000 + "and topicid in (6,15,24)";
+//     options["min"]=startTime;
+//     options["max"]=endTime;
 
-  var selected_date = new Date(selected_date_element.dataset.value)
-    getTimelineData(start_time.toISOString(), end_time.toISOString(),speedConstrain);
+//   //var selected_date = new Date(selected_date_element.dataset.value)
+//     getTimelineData(startTime, endTime,speedConstrain);
 
-    //timelineMaker(startTime, endTime);
+//     //timelineMaker(startTime, endTime);
 
-}
+// }
 
 function getTimelineData(startTime, endTime,constrain){
   
@@ -137,6 +137,9 @@ function getTimelineData(startTime, endTime,constrain){
                 start: data[eventNumber-1]['time'],
                 end: endTime
             });
+
+            options["min"]=startTime;
+            options["max"]=endTime;
 
             timelineMaker(timelineData);
               
@@ -175,69 +178,6 @@ document.getElementById("searchButton").onclick=function(){
 
   getTimelineData(startTime, endTime,speedConstrain);
 }
-
-
-const leftEle = document.getElementById('left');
-const rightUpEle = document.getElementById('rightUp');
-const rightDownEle = document.getElementById('rightDown');
-var selectBox= document.getElementById("rightUp");
-var resetBox= document.getElementById("resetButton");
-var figureBox = document.getElementById("rightDown");
-
-// The current position of mouse
-let MouseX = 0;
-let MouseY = 0;
-// The dimension of the element
-let LeftWidth = 0;
-let RightWidth = 0;
-
-// Handle the mousedown event
-// that's triggered when user drags the resizer
-const mouseDownHandler = function (e) {
-    // Get the current mouse position
-    MouseX = e.clientX;
-    MouseY = e.clientY;
-
-    // Calculate the dimension of element
-    const LeftStyles = window.getComputedStyle(leftEle);
-    const RightStyles = window.getComputedStyle(rightUpEle);
-    LeftWidth = parseInt(LeftStyles.width);
-    RightWidth = parseInt(RightStyles.width);
-
-    // Attach the listeners to `document`
-    document.addEventListener('mousemove', mouseMoveHandler);
-    document.addEventListener('mouseup', mouseUpHandler);
-};
-
-
-const mouseMoveHandler = function (e) {
-    // How far the mouse has been moved
-    const dx = e.clientX - MouseX;
-    const dy = e.clientY - MouseY;
-
-    // Adjust the dimension of element
-    let newLeftWidth = LeftWidth + dx;
-    let newRightWidth = window.innerWidth -newLeftWidth;
-    leftEle.style.width = `${newLeftWidth}px`;
-    rightUpEle.style.width = `${newRightWidth}px`;
-    resetBox.style.width = `${newRightWidth}px`;
-    rightDownEle.style.width = `${newRightWidth}px`;
-
-};
-
-const mouseUpHandler = function () {
-    // Remove the handlers of `mousemove` and `mouseup`
-    document.removeEventListener('mousemove', mouseMoveHandler);
-    document.removeEventListener('mouseup', mouseUpHandler);
-};
-// Query all resizers
-const resizers = leftEle.querySelectorAll('.resizer-r');
-
-
-// Loop over them
-[].forEach.call(resizers, function (resizer) {
-    resizer.addEventListener('mousedown', mouseDownHandler);
-});
 
 
 

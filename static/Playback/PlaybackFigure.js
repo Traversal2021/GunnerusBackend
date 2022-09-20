@@ -5,6 +5,14 @@ var selectBox= document.getElementById("rightUp");
 var resetBox= document.getElementById("resetButton");
 var figureBox = document.getElementById("rightDown");
 
+var showCount = 0;
+
+var mapContainer = document.getElementById("left");
+
+var topicContainer= document.getElementById("rightUp");
+var resetBox= document.getElementById("resetButton");
+var figureContainer = document.getElementById("rightDown");
+
 // The current position of mouse
 let MouseX = 0;
 let MouseY = 0;
@@ -59,8 +67,6 @@ const resizers = leftEle.querySelectorAll('.resizer-r');
 [].forEach.call(resizers, function (resizer) {
     resizer.addEventListener('mousedown', mouseDownHandler);
 });
-
-
 
 CheckList = ["crane1","crane2","crane3","crane4","crane5",
               "engine1","engine2","engine3", "engine4","engine5","engine6", "engine7","engine8","engine9",

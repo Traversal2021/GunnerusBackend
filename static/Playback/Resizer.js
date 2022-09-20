@@ -1,10 +1,33 @@
 const leftEle = document.getElementById('left');
 const rightUpEle = document.getElementById('rightUp');
 const rightDownEle = document.getElementById('rightDown');
-const drawButton + document.getElementById("drawButton")
 var selectBox= document.getElementById("rightUp");
 var resetBox= document.getElementById("resetButton");
 var figureBox = document.getElementById("rightDown");
+
+var showCount = 0;
+
+var mapContainer = document.getElementById("left");
+
+var topicContainer= document.getElementById("rightUp");
+var resetBox= document.getElementById("resetButton");
+var figureContainer = document.getElementById("rightDown");
+
+document.getElementById("showButton").onclick= function(){
+    if(showCount==0){
+        topicContainer.style.display='block';
+        topicContainer.style.width='30%';
+        mapContainer.style.width='70%';
+        showCount=1;
+    }
+    else{
+        topicContainer.style.display='none';
+        resetBox.style.display='none';
+        figureContainer.style.display='none';
+        mapContainer.style.width='100%';
+        showCount=0;
+    }
+}
 
 // The current position of mouse
 let MouseX = 0;
@@ -42,7 +65,6 @@ const mouseMoveHandler = function (e) {
     let newRightWidth = window.innerWidth -newLeftWidth;
     leftEle.style.width = `${newLeftWidth}px`;
     rightUpEle.style.width = `${newRightWidth}px`;
-    drawButton.style.width = `${newRightWidth}px`;
     resetBox.style.width = `${newRightWidth}px`;
     rightDownEle.style.width = `${newRightWidth}px`;
 
