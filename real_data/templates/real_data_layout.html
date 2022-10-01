@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    <span class="pln">$ bower install milligram</span>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="{% static '/real_data/css/menu.css' %}">
+
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script> var model_path = "{% static '/assembly.glb' %}"</script>
+    
+
+    <link rel="stylesheet" href="{% static '/real_data/css/layout.css' %}">
+
+
+    {% block head %}{% endblock %}
+ 
+
+	</head>
+	<body>
+        <div class="split left" id="left">
+          <div id="map"></div>
+          <ul class="menu" id ="menx"> 
+              <div class="toggle"><ion-icon name="menu"></ion-icon>
+              </div>
+              <li type="button" style="--i:0;" class ="active"><a href="#"><ion-icon name="home-outline"></ion-icon></a></li>
+              <li type="button" style="--i:1; " ><a href="#"><ion-icon name="boat"></ion-icon></a></li>
+              <li type="button" style="--i:2;" id="RealTimeButton"><a href="#"><ion-icon name="analytics-outline"></ion-icon></a></li>
+              <li type="button" style="--i:3;" ><a href="#"><ion-icon name="logo-steam"></ion-icon></a></li>
+              <li type="button" style="--i:4;" ><a href="#"><ion-icon name="videocam-outline"></ion-icon></a></li>
+              <li type="button" style="--i:5;" id="HistoricalButton"><a href="#"><ion-icon name="calendar-outline"></ion-icon></ion-icon></a></li>
+              <li type="button" style="--i:6;"><a href="#"><ion-icon name="game-controller-outline"></ion-icon></a></li>
+              <li type="button" style="--i:7;"><a href="#"><ion-icon name="camera-outline"></ion-icon></a></li>
+              <div class="indicator">
+              </div>
+          </ul>
+          <div class="resizer" id="resizer"></div>
+          <script src="{% static '/real_data/js/menu.js' %}"></script>
+          {% block mapControl %} {% endblock %}     
+        </div>
+
+        <div class="split right" id="rightSelection">
+          {%block topicSelection%} {% endblock %}
+          <input type="button" id="drawButton" value="Draw">         
+        </div>
+
+        <div class="split right graphs" id="rightResults">
+          <input type="button" id="drawButton" value="Draw">
+          {% block figureContainer %} {% endblock %}
+        </div>
+
+        <script src="{% static '/real_data/js/resizer.js' %}"></script>
+
+	</body>
+</html>

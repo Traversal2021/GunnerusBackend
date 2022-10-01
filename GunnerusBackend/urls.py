@@ -21,6 +21,7 @@ from CraneRealTime import views as CraneReal
 from Playback import views as Playback
 from HistoricalData import views as historyicalData
 from shipmotion import views as shipmotion
+from real_data import views as RealData
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +36,8 @@ urlpatterns = [
     path('timelineData/<str:info>',historyicalData.timelineData),
     path('advanceSearch/<str:info>',historyicalData.advancedSearch),
     path('shipmotion/',shipmotion.shipmotion),
-    path('shipmotion2/',shipmotion.shipmotion2)
+    path('shipmotion2/',shipmotion.shipmotion2),
+    path('test/',RealData.RealDataBase),
+    path('ShipPositionRealTime/', apiview.ShipPositionRealTime)
 
 ]

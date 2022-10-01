@@ -27,3 +27,12 @@ def craneRealData(request):
         }}])
 
     return HttpResponse(craneData,content_type='text/json')
+
+def ShipPositionRealTime(request):
+    PositionData = json.dumps([{'ShipPosition':  { 
+        "lat": message_received["Gunnerus/SeapathGPSGga/Latitude"], 
+        "lon": message_received["Gunnerus/SeapathGPSGga/Longitude"],
+        "head": message_received["Gunnerus/SeapathMRU/Heading"], 
+        }}])
+
+    return HttpResponse(PositionData,content_type='text/json')

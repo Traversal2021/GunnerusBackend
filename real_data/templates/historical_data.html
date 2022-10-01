@@ -1,0 +1,31 @@
+{% extends 'real_data_layout.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Historical data</title>
+{% endblock %}
+
+{% block mapControl %}
+    <script type="module" src="{% static '/real_data/js/load_map.js' %}"></script>
+{% endblock %}
+
+{% block topicSelection %}
+
+    <div class="timepicker" id="timepicker">    
+        <input type="datetime-local" id="startTime" style="display: inline-block; width: 45%; margin-left: 2%;">
+        <label style="display: inline-block;">to</label>
+        <input type="datetime-local" id="endTime" style="display: inline-block; width: 45%; justify-content: center;">
+        <br>
+        <button class="button button-outline button-small" id="oneHour" >Past 1 hour</button>
+        <button class="button button-outline button-small" id="oneDay" >Past 1 day</button>
+        <button class="button button-outline button-small" id="oneWeek">Past 1 week</button>
+        <br>
+        <input id="timeSubmit" type="button" value="Submit" style="display: block;margin-left: 70%;">
+    </div>
+    <script type="module" src="{% static '/real_data/js/timeline.js' %}"></script>
+
+{% endblock %}
+
+{% block figureContainer %}
+
+{% endblock %}

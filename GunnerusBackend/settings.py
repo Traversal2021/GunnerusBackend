@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'CraneRealTime',
     'Playback',
     'HistoricalData',
-    'shipmotion'
+    'shipmotion',
+    'real_data'
 ]
 
 MIDDLEWARE = [
